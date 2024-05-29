@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <title>Rent A Car - Zrenjanin</title>
+      <link rel="icon" type="image/x-icon" href="images/logo.png">
+
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link href="css/output.css" rel="stylesheet">
+      <link rel="stylesheet" href="css/style.css">
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/fontawesome.min.css"/>
+      <link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet">
+   </head>
+   <body>
+      <div id="loader" class="h-screen w-screen flex justify-center items-center fixed top-0 left-0 bg-white z-50" role="status">
+        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+            <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+        </svg>
+        <span class="sr-only">Loading...</span>
+      </div>
+      <header class="fixed w-full">
+         <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
+            <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
+               <a href="index.html" class="flex items-center">
+               <img src="./images/logo.png" class="h-6 mr-3 sm:h-9" alt="RentACar Logo" />
+               <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">RentACar</span>
+               </a>
+               <div class="flex items-center lg:order-2">
+                  <div class="hidden mt-2 mr-4 sm:inline-block">
+                     <a id="contactButton" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" href="#contactSection">
+                     <i class="fa-solid fa-phone mr-2"></i>
+                     Kontakt
+                     </a>
+                  </div>
+                  <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+                     <span class="sr-only">Open main menu</span>
+                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                     </svg>
+                     <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                     </svg>
+                  </button>
+               </div>
+               <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                  <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                     <li>
+                        <a href="#heroSection" class="block py-2 pl-3 pr-4 text-blue bg-blue-700 rounded lg:bg-transparent lg:text-blue-700 lg:p-0 dark:text-white" aria-current="page">Početna</a>
+                     </li>
+                     <li>
+                        <a href="cars.html" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Vozila</a>
+                     </li>
+                     <li>
+                        <a href="#requirementsSection" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Uslovi za iznajmljivanje</a>
+                     </li>
+                     <li>
+                        <a href="#testimonialSection" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Recenzije</a>
+                     </li>
+                     <li>
+                        <a href="#faqSection" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">FAQ</a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </nav>
+      </header>
+      <section id="heroSection" class="animate-fadeIn bg-white dark:bg-gray-900">
+         <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
+            <div class="text_container mr-auto place-self-center lg:col-span-7">
+               <h1 class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-5xl dark:text-white">Najbolji Izbor za <br>Iznajmljivanje Automobila </h1>
+               <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Dobrodošli na našu platformu za iznajmljivanje automobila, gde vam nudimo širok spektar vozila za sve vaše potrebe. Bez obzira da li vam je potreban automobil za poslovno putovanje, vikend avanturu ili porodični odmor, kod nas ćete pronaći vozilo koje odgovara vašim zahtevima. </p>
+               <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
+                  <a href="cars.html" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                  <i class="fa-solid fa-arrow-right mr-2"></i>
+                  Pogledaj Ponudu
+                  </a> 
+               </div>
+
+            </div>
+            <div id="img_container" class="hidden lg:mt-0 lg:col-span-5 lg:flex">
+               <img class="heroImage"  src="https://www.transparentpng.com/download/car-png/car-free-transparent-png-8.png" alt="Hero Image">
+            </div>
+         </div>
+      </section>
+      <section class="bg-white dark:bg-gray-900">
+         <div class="max-w-screen-xl  px-4 pb-8 mx-auto lg:pb-16">
+            <div class="grid grid-cols-2 gap-8 text-gray-500 sm:gap-12 sm:grid-cols-3 lg:grid-cols-5 dark:text-gray-400">
+               <a href="#" class="flex items-center lg:justify-center">
+                  <svg class="hover:text-gray-900 dark:hover:text-white" fill="currentColor"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 130 130" xml:space="preserve" width="125px" height="125px">
+                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                     <g id="SVGRepo_iconCarrier">
+                        <path d="M65.2,40.7C29.6,40.7,1,51.4,1,64.8c0,13.3,28.8,24.1,64.2,24.1c35.4,0,64.2-10.8,64.2-24.1 C129.5,51.6,100.6,40.7,65.2,40.7z M65.2,86.8c-34,0-61.5-9.8-61.5-22c0-12.1,27.6-22,61.5-22c34,0,61.5,9.8,61.5,22 C126.8,77,99.2,86.8,65.2,86.8z M90.5,69.7c0,0.1,0,0.2,0,0.2c0,0.1,0.2,0.2,0.3,0.3c0,0,0.1,0.1,0,0.2c-0.4,0.9-0.8,1.4-1.3,2.1 c-0.5,0.7-1,1.2-1.6,1.7c-0.9,0.8-2.3,1.6-3.4,1.1c-0.5-0.3-0.7-0.9-0.7-1.5c0-1.5,0.7-3.1,2-4.7c1.5-1.9,3.3-2.9,4.4-2.3 C91.4,67.3,91.1,68.7,90.5,69.7z M58.7,59.7c-0.1-0.6,0.1-1.3,0.7-1.8c0.3-0.3,0.7-0.3,1-0.1c0.3,0.2,0.1,0.8-0.1,1.3 c-0.3,0.5-0.8,0.9-1.3,0.9C58.8,59.9,58.7,59.9,58.7,59.7z M65.2,44.7c-32.8,0-59.4,9.1-59.4,20.2C5.8,75.9,32.4,85,65.2,85 c32.8,0,59.4-9.1,59.4-20.2C124.6,53.7,98,44.7,65.2,44.7z M34.7,78.1c-3.5,0-6.6-2.1-7-5.9c-0.2-2.1,0.4-3.9,1.6-5.5 c1-1.4,2.8-2.5,4.3-2.8c0.5-0.1,1.1,0,1.4,0.3c0.4,0.5,0.3,1-0.1,1.3c-1.1,0.6-2.5,1.6-3.2,2.9c-0.6,1.1-0.7,2.5,0.2,3.7 c1.4,2.1,5.3,2.2,9-1.2c0.9-0.8,1.7-1.6,2.5-2.6c1.6-1.8,2.1-2.5,4.3-5.5c0,0,0-0.1,0-0.1c0,0,0,0-0.1-0.1c-1.4,0-2.7,0.5-3.9,1.4 c-0.3,0.3-0.8,0.2-1.1-0.1c-0.2-0.4-0.1-0.9,0.3-1.1c1.9-1.4,4.1-1.6,6.2-2c0,0,0.2,0,0.3-0.2c0.9-1.1,1.6-2.2,2.5-3.3 c1-1.2,2.2-2.2,3.1-3.1c1.3-1.1,2.2-1.5,3-2c0.2-0.1,0-0.3-0.1-0.3c-4.8-0.9-9.8-2.1-14.5-0.3c-3.3,1.2-4.7,3.8-4,5.6 c0.5,1.2,2.1,1.4,3.7,0.7c1.3-0.6,2.4-1.6,3.3-2.9c0.5-0.7,1.4-0.2,0.9,1c-1.4,3.3-4.1,5.9-7.3,6c-2.8,0.1-4.5-1.9-4.5-4.4 c0-4.9,5.5-8.2,11.3-8.7c7-0.6,13.6,1.3,20.5,2.1c5.3,0.6,10.4,0.7,15.7-0.6c0.6-0.1,1.1,0.3,1,0.9c-0.1,0.9-0.8,1.8-2.5,2.8 c-2,1.1-4.1,1.4-6.3,1.4c-5.3,0-10.2-2-15.3-3.1c0,0.2,0.1,0.5-0.1,0.6c-2.8,2.1-5.4,4.2-7.1,7.1c-0.1,0.1,0,0.1,0.1,0.1 c1.5-0.1,2.8-0.1,4.2-0.2c0.2,0,0.2-0.1,0.2-0.3c-0.1-1,0.2-2.2,1.1-3c0.9-0.8,2.1-0.9,2.8-0.3c0.9,0.7,0.8,1.9,0.3,2.8 c-0.5,0.9-1.3,1.4-2,1.7c0,0-0.2,0-0.1,0.2c0,0.2,1.1,0.8,1.2,1c0.1,0.1,0,0.4-0.1,0.5c-0.1,0.1-0.3,0.2-0.5,0.2 c-0.2,0-0.3-0.1-0.5-0.2c-0.5-0.3-1.1-0.7-1.4-1.2c-0.1-0.2-0.2-0.2-0.5-0.2c-1.5,0.1-3.8,0.3-5.4,0.5c-0.4,0-0.4,0.1-0.5,0.3 c-2.5,4.1-5.2,8.6-8.2,11.6C40.2,77.2,37.5,78.1,34.7,78.1z M103,57.9c-0.5,0.8-9.9,15.2-10.5,16.6c-0.2,0.5-0.2,0.8,0,1.1 c0.5,0.7,1.6,0.3,2.3-0.2c2-1.4,3.4-3.1,5-4.6c0.1-0.1,0.2-0.1,0.3,0c0.2,0.2,0.6,0.5,0.8,0.7c0.1,0.1,0.1,0.2,0,0.3 c-1.5,1.9-3.2,3.6-4.8,4.9c-2.5,1.9-5,2.4-6.3,1.2c-0.5-0.5-0.7-1.1-0.7-1.7c0-0.3-0.2-0.3-0.3-0.2c-1.5,1.5-4.1,3.1-6.4,1.9 c-2-1-2.4-3.3-2-5.3c0,0,0-0.3-0.3-0.2c-0.4,0.3-0.9,0.6-1.6,0.9c-0.8,0.3-1.2,0.4-2,0.4c-1,0-1.8-0.4-2.4-1.4 c-0.3-0.5-0.5-1.3-0.5-1.9c0-0.1-0.1-0.2-0.2,0c-1.6,2.4-3.1,4.8-4.7,7.3c-0.1,0.1-0.2,0.2-0.3,0.2c-1,0-2.1,0-3.1,0 c-0.2,0-0.3-0.1-0.2-0.3c0.6-1.1,3.6-5.5,5.7-9.3c0.6-1,0.5-1.6,0.1-1.8c-0.4-0.3-1.3,0.1-2.1,0.7c-2,1.5-3.7,3.9-4.6,5 c-0.5,0.6-1,1.6-2.3,3c-2.1,2.3-4.9,3.6-7.5,2.7c-1.5-0.5-2.5-1.7-2.9-3.1c-0.1-0.3-0.2-0.4-0.4-0.2c-0.4,0.5-1.3,1.3-2.1,1.8 c-0.1,0.1-0.3,0.2-0.5,0.1c-0.2-0.1-0.7-0.8-0.8-1.1c-0.1-0.2,0-0.3,0.1-0.4c1.1-0.9,1.6-1.5,2.1-2c0.3-0.4,0.6-0.9,0.9-1.7 c0.6-1.6,2.1-4.6,5-6.2c1.1-0.6,2.2-1,3.5-1.2c0.5-0.1,1,0,1.1,0.4c0.1,0.2,0.2,0.6,0.3,0.8c0.1,0.2,0,0.3-0.2,0.4 c-1.7,0.7-3.4,1.7-4.6,3.3c-1.4,1.8-1.7,4-0.8,5.2c0.7,0.9,1.7,1.1,2.8,0.7c1.6-0.5,2.9-1.9,3.6-3.6c0.7-1.8,0.9-3.8,0.3-5.7 c-0.1-0.3,0-0.6,0.2-0.7c0.4-0.3,1-0.6,1.1-0.7c0.4-0.2,0.8-0.1,1,0.2c0.6,0.8,0.9,2,0.9,3.3c0,0.3,0.1,0.3,0.3,0.1 c1-1.1,2-2.2,3-3.1c1-0.8,2.3-1.4,3.4-1.4c1.5,0,2.3,1.1,2.2,2.9c0,0.2,0.2,0.2,0.3,0.1c0.5-0.7,0.8-1,1.3-1.4 c1.1-0.9,2.1-1.3,3.3-1.2c1.4,0.1,2.5,1.4,2.3,2.8c-0.1,0.9-0.7,1.8-1.5,2.2c-0.7,0.4-1.6,0.3-2.2-0.2c-0.5-0.4-0.6-1.1-0.5-1.7 c0-0.1-0.1-0.3-0.3-0.1c-1.4,1.4-1.5,3.2-0.6,4.1c1,0.9,2.4,0.3,3.5-0.4c2-1.3,3.5-3,5.2-4.4c1.2-0.9,2.5-1.7,4-1.9 c0.8-0.1,1.6-0.1,2.4,0.3c1.1,0.4,1.7,1.3,1.8,2.1c0,0.2,0.2,0.3,0.3,0.1c0.8-1.3,5.4-8.1,5.8-8.8c0.1-0.2,0.2-0.3,0.5-0.3 c1,0,2.3,0,3.2,0C103,57.7,103,57.8,103,57.9z"></path>
+                     </g>
+                  </svg>
+               </a>
+               <a href="#" class="flex items-center lg:justify-center">
+                  <svg  class="hover:text-gray-900 dark:hover:text-white" fill="currentColor" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 520 520.1" xml:space="preserve" width="125px" height="125px">
+                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                     <g id="SVGRepo_iconCarrier">
+                        <g id="_x33_P2o3m_1_">
+                           <g>
+                              <path d="M3,271.7c0-7.5,0-14.9,0-22.4c0.2-1.5,0.5-2.9,0.7-4.4c1.7-12.5,2.4-25.3,5.1-37.6C33.5,92.9,131.9,9.4,248.6,3.9 c63.6-3,121.2,14.5,171.6,53.6c52.9,41,85.2,94.7,96.7,160.8c1.5,8.5,2.4,17.1,3.5,25.7c0,11.1,0,22.1,0,33.2 c-0.3,1.3-0.6,2.6-0.8,3.9c-2.9,16.3-4.5,33-8.9,48.7C476.4,450.8,361,528.6,235,515.7c-60.4-6.1-112.5-30.9-155.6-73.5 c-41.3-40.8-65.9-90.3-73.8-147.9C4.6,286.8,3.8,279.2,3,271.7z M257.8,33.1c-6.8,0-13.8-0.1-20.6,0c-2.5,0-5.1,0.4-7.6,0.6 c-50.3,4-95.6,21.2-136.3,50.8c-18.9,13.7-34.7,30.2-42.2,52.7c-4.6,13.9-7.4,28.6-9.3,43.2c-6.7,51-2.4,101.3,11.7,150.7 c9.8,34.8,25.2,67,46.4,96.3c17,23.3,40.4,37.4,67,46.7c59.1,20.5,119,21.6,178.8,4.4c40.4-11.6,73.5-32.6,93.5-72.5 c27.1-54,43-110.1,43.5-170.7c0.2-23.9-1.8-47.8-5.6-71.4c-5.8-35.6-22.8-64.2-53.6-83.7C373.1,48.2,317.7,32.8,257.8,33.1z"></path>
+                              <path d="M81.2,189.2c0.8-18.5,0.7-35.8,2.7-52.8c2.3-20,13.6-34.3,32.6-42.1C141.6,84,168,78.3,194.8,74.6 c29.2-4.1,58.6-5.6,88.1-4.6c35.7,1.2,70.9,5.4,104.6,17.9c7.3,2.7,14.3,5.9,21.3,9.4c18.4,9.2,26.9,25.4,29.9,44.8 c1.7,10.6,1.8,21.4,2.1,32.1c1.8,71.4-8.6,141.1-30.6,209.1c-4.4,13.4-9.2,26.4-14.1,39.6c-0.7,1.9-2,3.6-3.5,5 c-14.2,12.9-31.5,19.7-49.7,24.7c-33.1,9-66.9,10.6-100.9,8.5c-25.4-1.5-50.5-5.3-74.5-13.9c-5.7-2.1-11.4-4.6-16.9-7.3 c-11.1-5.4-18.8-13.6-23.7-25.4c-23.6-56.1-38.6-114.4-43.1-175.2C82.4,222.3,82,205.1,81.2,189.2z M269.9,369.2 c0-33,0-65.6,0-98.3c10.3,0,19.7,0,29.7,0c0,33,0,65.4,0,98.3c7.4,0,14.1,0,21.3,0c0.1-1.5,0.2-2.7,0.2-4c0-53.1,0-106.1,0-159.1 c0-2-0.5-4.1-1.5-6c-5.6-11.7-11.5-23.3-17.2-34.9c-1.2-2.7-2.8-3.6-5.8-3.5c-13.6,0.2-27.2,0.1-40.7,0.1c-5.8,0-5.8,0-5.8,5.8 c0,65.4,0,130.8,0,196.4c0,1.8,0,3.5,0,5.5C256.6,369.2,262.7,369.2,269.9,369.2z M193.2,162.6c-20.7,0-41.3,0-61.6,0 c0,69.3,0,138.2,0,207.3c7.2,0,14,0,21.3,0c0-33.1,0-65.8,0-99.3c11,0,21.5,0,31.8,0c0-8,0-15.4,0-23.3c-10.8,0-21.2,0-31.6,0 c0-20.7,0-41.1,0-61.8c13.5,0,26.6,0,40.1,0C193.2,177.5,193.2,170.2,193.2,162.6z M369.4,185.8c7.5,0,14.4,0,21.6,0 c0-8.1,0-15.7,0-23.2c-21.9,0-43.4,0-64.9,0c0,7.9,0,15.3,0,23.2c7.1,0,13.7,0,21.6,0c0,61.4,0,122.3,0,183.4c7.9,0,14.5,0,21.8,0 C369.4,308.3,369.4,247.3,369.4,185.8z M224.4,369.9c0-69.5,0-138.6,0-207.9c-7.3,0-14.1,0-20.9,0c0,69.5,0,138.6,0,207.9 C210.5,369.9,217.3,369.9,224.4,369.9z"></path>
+                              <path d="M299.4,242.5c-10.1,0-19.5,0-29,0c0-19.2,0-38.2,0-57.7c5.5,0,10.9-0.1,16.4,0.1c0.9,0,2.1,1.5,2.5,2.5 c3.2,7.6,6.3,15.1,9.4,22.7c0.3,0.7,0.6,1.5,0.6,2.2C299.4,222.2,299.4,232.3,299.4,242.5z"></path>
+                           </g>
+                        </g>
+                     </g>
+                  </svg>
+               </a>
+               <a href="#" class="flex items-center lg:justify-center">
+                  <svg class="hover:text-gray-900 dark:hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 44.6 44.6" xml:space="preserve" width="125px" height="125px">
+                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                     <g id="SVGRepo_iconCarrier">
+                        <title>honda-logo</title>
+                        <g>
+                           <path d="M32.6,7.2c-1,4.6-1.4,6.7-2.3,10s-1.4,6.1-2.5,7.6c-0.8,1.1-2.1,1.8-3.5,1.9c-1.3,0.1-2.7,0.1-4,0 c-1.4-0.1-2.7-0.8-3.5-1.9c-1.1-1.4-1.7-4.4-2.5-7.6S13,11.8,12,7.2l-1.5,0.1c-0.6,0-1.1,0.1-1.6,0.2c0,0,0.6,9.4,0.9,13.4 c0.3,4.2,0.8,11.2,1.2,16.6c0,0,0.9,0.1,2.3,0.2s2.2,0.1,2.2,0.1c0.6-2.4,1.4-5.6,2.2-7c0.5-0.8,1.4-1.3,2.4-1.3 c0.7-0.1,1.4-0.1,2.2-0.1l0,0c0.7,0,1.4,0,2.2,0.1c1,0,1.9,0.5,2.4,1.3c0.9,1.4,1.6,4.6,2.2,7c0,0,0.7,0,2.2-0.1s2.3-0.2,2.3-0.2 c0.5-5.3,1-12.4,1.2-16.6c0.3-4,0.9-13.4,0.9-13.4c-0.5-0.1-1-0.1-1.6-0.2L32.6,7.2z"></path>
+                           <path d="M44.4,12.8c-0.6-6-4.6-7.2-8.1-7.8c-2.3-0.3-4.6-0.5-6.9-0.6c-1.8-0.1-5.9-0.2-7.1-0.2s-5.4,0.1-7.1,0.2 C12.8,4.4,10.5,4.6,8.2,5c-3.5,0.6-7.5,1.9-8.1,7.8c-0.2,2-0.2,4-0.2,6c0,2.7,0.2,5.4,0.6,8.1c0.2,2.3,0.7,4.5,1.3,6.8 c0.9,2.6,1.7,3.4,2.6,4.1c1.6,1.1,3.3,1.7,5.2,2c8.4,0.9,16.8,0.9,25.2,0c1.9-0.3,3.6-0.9,5.2-2c1-0.8,1.8-1.5,2.6-4.1 c0.6-2.2,1.1-4.5,1.3-6.8c0.3-2.7,0.5-5.4,0.6-8.1C44.6,16.8,44.5,14.8,44.4,12.8z M42.2,22.8c-0.1,3.3-0.6,6.5-1.4,9.7 c-0.3,1.5-1.1,2.8-2.2,3.9c-1.5,1.2-3.3,1.9-5.1,2c-7.5,0.8-15,0.8-22.5,0c-1.9-0.1-3.6-0.8-5.1-2c-1.1-1.1-1.8-2.4-2.2-3.9 c-0.8-3.2-1.2-6.4-1.4-9.7c-0.2-3.3-0.2-6.7,0.1-10C3,9,4.8,7.2,8.8,6.5c2.2-0.4,4.5-0.6,6.7-0.7c1.9-0.1,5-0.2,6.8-0.2 s4.9,0,6.8,0.2c2.2,0.1,4.5,0.3,6.7,0.7c4,0.7,5.8,2.6,6.3,6.3C42.3,16.1,42.4,19.5,42.2,22.8L42.2,22.8z"></path>
+                        </g>
+                     </g>
+                  </svg>
+               </a>
+               <a href="#" class="flex items-center lg:justify-center">
+                  <svg class="hover:text-gray-900 dark:hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2500 2500" xml:space="preserve" width="125px" height="125px">
+                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                     <g id="SVGRepo_iconCarrier">
+                        <path d="M2225.5,857.7c-298.8-150.8-635.7-216.5-969.3-216.5c-336.4,0-687.1,52.5-984.8,216.5C146.6,926.8,8,1047.7,8,1201.8h0 c0,152.4,136.4,278.9,262.4,342.4c299.3,151.3,636.8,216.5,970.9,216.5c336.3,0,687.1-52.5,984.7-215.9 c123.7-67.9,262.9-188.3,262.9-341.9C2488.9,1048.8,2353.6,921.8,2225.5,857.7z M808.8,1492.3l-203.3-244.7h-6.1v244.7h-158V946.7 h-34.8v-36.5h192.8v204.9h6.1l166.8-204.9h177.8l-220.9,271.7l256.3,310.4H808.8z M1314.7,1492.3h-157.9V948.9h-34.2v-40.3h192.2 V1492.3z M1925.6,1492.3l-129.8-380.5l-130.3,380.5h-172.3l189.4-545.7h0h-30.9v-35.9h243.6l198.3,581.6H1925.6z"></path>
+                     </g>
+                  </svg>
+               </a>
+               <a href="#" class="flex items-center lg:justify-center">
+                  <svg class="hover:text-gray-900 dark:hover:text-white" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 261.9 263.7" xml:space="preserve" width="125px" height="125px">
+                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                     <g id="SVGRepo_iconCarrier">
+                        <g id="Layer_2"> </g>
+                        <g id="Layer_1">
+                           <g>
+                              <path d="M220.2,23.5l-0.4-2.6l-2.4-1.1C205.2,14,172.2,0.8,128.8,0.8c-41,0-72.4,11.8-87.6,18.9l-2.4,1.1l-0.4,2.6 c-2.7,17.3-7.5,63.3,5.9,115.2c13.6,52.6,41.3,93.6,82.1,122.1l2.8,2l2.8-2c40.8-28.4,68.5-69.5,82.1-122.1 C227.7,86.8,222.9,40.8,220.2,23.5z M204.6,136.2c-12.7,49-38,87.4-75.3,114.4C92,223.6,66.7,185.1,54,136.2 c-12.4-47.7-8.8-90.1-6.1-108.5c15.1-6.8,43.9-16.8,80.9-16.8c38.8,0,68.8,11,82,16.8C213.4,46.1,217,88.5,204.6,136.2z"></path>
+                              <polygon points="59.5,48.7 65.4,46.5 66.2,48.6 57.8,51.8 53.5,39.9 55.9,39 "></polygon>
+                              <polygon points="96.1,41.3 93.7,41.8 91.7,31.4 91.6,31.4 91.3,42.2 88.8,42.7 84.5,32.8 84.5,32.8 86.5,43.2 84.1,43.6 81.7,31.2 85.5,30.5 89.6,39.8 89.6,39.8 89.9,29.6 93.7,28.9 "></polygon>
+                              <path d="M152.6,33.1l5.3,0.5l-0.7,6.8l-1.8-0.2l-0.1-1.6c-0.7,0.7-1.8,1.7-4.1,1.5c-3-0.3-5.6-2.8-5.1-7.2c0.4-3.4,2.6-6.5,6.8-6 c3.9,0.4,5.1,3.1,5.1,4.8l-2.6-0.3c0-0.5-0.7-2.2-2.5-2.4c-1.9-0.2-3.7,0.9-4.1,4.2c-0.4,3.4,1.4,4.5,3.2,4.7 c0.6,0.1,2.5,0,3.3-2.5l-2.9-0.3L152.6,33.1L152.6,33.1z"></path>
+                              <polygon points="165.1,36 164.1,41.6 161.5,41.1 163.8,28.6 166.4,29.1 165.5,33.8 170.4,34.7 171.2,30 173.8,30.4 171.6,42.9 169,42.5 170,36.9 "></polygon>
+                              <polygon points="178.6,44.6 176,44 179,31.6 181.5,32.2 "></polygon>
+                              <polygon points="194.1,35.8 196.5,36.5 192.8,48.6 190.3,47.9 188,37.7 188,37.7 185.3,46.4 183,45.6 186.7,33.5 189.3,34.3 191.6,44.2 191.6,44.2 "></polygon>
+                              <polygon points="199.5,51.1 197,50.2 201.5,38.3 204,39.3 "></polygon>
+                              <path d="M181.7,130c-2.3-0.7-4.9-2.1-8.1-5.5c0.2-1.5,0.3-2.5,0.2-3.4s-0.4-1.5-0.8-2.4c-0.4-0.9-0.9-1.7-1.2-3 c-0.3-1.3-0.5-3.1-0.2-6c0.3-2.9,0.2-7.6-1-12.7c-1.2-5.1-3.6-10.6-7.7-15.2c1.1-3.4,1.7-5.8,1.8-7.7c0.1-1.9-0.2-3.3-1-5 c-0.8-1.6-2.8-3-5.8-3.9c-3-0.9-6.9-1.4-11.4-1.4s-11,0.4-16.3,0.3c-5.3-0.1-9.6-0.5-9.6-1.9c0-1.4,0.7-2,1.7-2.4s2.3-0.4,3.3-0.5 c1.5,0.6,3.7,1,5.9,1.1c2.2,0.2,4.6,0.2,6.4,0.2c1.9,0,3.6-0.6,5.5-1.1c1.8-0.5,3.8-1.1,6-1.1c-1.9-0.6-4.3-1.5-6.8-2.2 c-2.5-0.7-5-1.1-7.1-0.6c-0.8-0.7-1.3-1.3-2.2-1.5c-0.9-0.2-2.1-0.2-4.1,0.4c-2,0.5-3.3,0.7-4.3,0.9c-1.1,0.1-1.9,0.2-3.2,0.5 c-1.3,0.3-3,0.5-4.4,1.2c-1.4,0.7-2.5,1.8-2.5,4c0,2.1,0.8,4,2.9,5.3c2.2,1.3,5.8,2.1,11.5,2c5.8-0.1,12.1-0.2,17.3,0 c5.2,0.3,9.3,1,10.7,2.6c1.4,1.6,1.8,2.7,1.6,3.6c-0.2,0.9-1,1.6-2,2.5c-0.9,0-2.4,0.1-4.3,0c-1.8-0.1-3.9-0.5-5.8-1.3 c-1.9-0.9-4.1-1.4-6.4-1.4c-2.2,0-4.5,0.4-6.3,1.5c-1.9,1-6.5,3.3-11.2,6.7c-4.7,3.5-9.6,8.2-11.8,14.3c-2.3,6.1-3.4,9.9-4.1,12.6 c-0.7,2.7-0.9,4.1-1.4,5.5c-0.5,1.4-1.3,2.8-2,4.4c-0.7,1.6-1.3,3.3-1.2,5.3c0,2-0.1,4.4-0.4,6.7s-0.6,4.5-0.9,6.1 s-0.8,3.5-1.2,5.7s-0.7,4.5-0.6,7c0,2.5-0.1,5-0.5,7.4c-0.3,2.4-0.9,4.6-1.6,6.5c-0.7,1.9-1,3.5-1.2,5.1c-0.3,1.5-0.6,3-1.4,4.5 c-0.9,1.5-2,3.4-3.2,5.2c-1.2,1.8-2.3,3.5-3.2,4.7c-0.9,1.1-1.3,2.5-1,3.6c0.3,1.1,1.2,2,3.1,2.2c1.9,0.2,3.5-0.2,4.7-1 c1.2-0.8,2-1.9,2.2-3.2c0.2-1.3,0.2-3,0.3-4.8c0.1-1.8,0.2-3.6,0.8-5l0.6-1.5l0.6-1.5c0.6-1,1-1.4,1.5-1.7 c0.4-0.3,0.9-0.6,1.5-1.3s1.6-2.9,2.4-5.2c0.8-2.3,1.5-4.9,1.4-6.7c0-1.8,0.1-3.2,0.4-4.3c0.3-1.2,0.7-2.1,1.2-3s0.8-1.9,1.2-2.7 c0.5-0.8,1.1-1.3,2.2-1.2c1.1,0.1,1.5,0.7,1.6,1.4c0.1,0.7,0.1,1.6,0.5,2.4c0.4,0.8,0.8,1.6,1.3,2.3c0.5,0.7,1.2,1.3,2.3,1.7 c1,0.4,1.8,1.1,2.3,2c0.4,0.9,0.4,1.9-0.2,2.8c-0.6,0.9-1.5,2.4-2.2,4c-0.7,1.6-1.2,3.1-1.2,4.1c0,1,0.2,2.5,0,4.1 s-0.6,3.2-1.9,4.5c-1.2,1.3-2.2,2.6-2.9,3.7c-0.7,1.1-1,2.1-1,2.7c0,0.6,0.3,1.4,0.9,2.1c0.7,0.7,1.7,1.1,3.4,1.1 c1.6,0,2.9-0.4,3.8-1c0.9-0.6,1.5-1.5,1.9-2.6c0.4-1.1,0.3-2,0.1-2.7c-0.2-0.7-0.4-1.3-0.4-2.1c0-0.8,0.2-1.6,0.5-2.6 c0.3-0.9,0.6-1.9,0.7-2.8c0.1-0.9,0.3-2,0.7-3.2c0.4-1.2,1-2.5,2-3.9s1.5-2.6,2-3.7c0.5-1.1,0.8-2,1.4-2.9 c0.6-0.9,0.9-1.3,1.1-1.5c0.2-0.1,0.5,0.1,1.1,0.4c0.6,0.4,0.8,0.7,0.6,1.2c-0.1,0.4-0.5,1-0.9,1.6s-1.1,1.7-1.9,2.9 c-0.8,1.1-1.6,2.4-2.1,3.2c-0.5,0.9-0.8,2-0.6,3s0.8,1.7,2.2,1.8c1.4,0.1,2.5,0.1,3.2-0.1c0.8-0.2,1.2-0.7,1.3-1.4 c0.1-0.8,0.3-2,0.7-3.2c0.3-1.2,0.7-2.4,1.2-3.2c0.5-0.8,0.8-1.5,1-2.1c0.2-0.6,0.2-1.1,0.2-1.5c0.8,0.7,1.4,1.6,2,2.5 c0.5,0.9,1,1.8,1.4,2.7c0.4,0.9,1.3,1.9,2.9,2.7c1.6,0.8,3.9,1.3,7,1.2c3.1-0.2,4.7-0.3,5.6-0.6s1.1-0.7,1.4-1.5 c0.4-0.8,1.2-2.3,1.6-3.8c0.4-1.5,0.4-3.1-1-4c0.2-1.3,0.6-3,1.1-4.6c0.5-1.6,1.3-3.2,2.3-4.3c1-1,2.4-2.1,3.6-3 c1.2-0.9,2.3-1.8,2.6-2.4c1.6,0.9,3.2,1.9,4.3,3.5c1.2,1.6,1.9,3.6,2.1,6.4c0,1.5,0.2,2.9,0.5,4.2c0.2,1.2,0.5,2.3,0.6,3 c0.1,0.8,0.1,1.6,0.2,2.4c0,0.9,0,1.7,0.2,2.6s0.7,1.7,1.4,2.2c0.7,0.6,1.6,0.9,2.4,0.7c0.8-0.1,1.4-0.8,1.9-1.7 c0.5-0.9,0.8-2,0.8-2.8c0-0.9-0.3-1.5-0.6-2c-0.4-0.5-0.8-0.9-1.2-1.2s-0.6-0.7-0.7-1.2s0-1.1,0.4-2.1c0.4-1,0.3-1.9,0-2.6 c-0.3-0.7-0.7-1.3-1.1-1.7s-0.8-1.4-1.2-2.8c-0.3-1.4-0.5-3.1-0.5-4.7s-0.1-3.5-0.6-5.2c-0.5-1.6-1.2-3-2.2-3.6 c2.9-0.2,6.2-0.4,9.1-1.3s5.5-2.4,7-5C185.9,130.5,184,130.7,181.7,130z M172.4,133.1c-2.6-0.6-4.8-1.7-5.9-3 c-0.6-0.7-1.4-1.4-2.2-1.9c-0.9-0.5-1.8-0.9-2.7-1.2c-0.9-0.2-2.3-0.8-3.8-1.4c-1.5-0.6-2.9-1.3-3.8-1.7c-0.2,0.4-0.6,0.9-1.2,1.5 c-0.6,0.6-1.4,1.4-2.4,2.2c-0.9,0.8-1.1,1.5-1.1,2c0.1,0.5,0.5,1,0.7,1.4c0.3,0.4,1.4,1.3,2.6,2.4c1.2,1,2.5,2,2.9,2.5 c-1.4,0-2.4-0.1-3.6-0.5c-1.2-0.4-2.5-1.1-4.7-2.5c-2.2-1.4-2.9-2.8-2.9-4.1c0-1.2,0.6-2.3,0.9-2.7s1.1-1.1,1.9-1.7 c0.8-0.6,1.6-1.2,1.9-1.5s0.6-0.6,0.5-0.9c0-0.3-0.3-0.5-0.8-0.4c-3.7,0.6-6.3,1.6-8,2.7c-1.7,1.1-2.4,2.2-2.5,3 c-0.1,0.8,0.1,1.5,0.4,2.2c0.3,0.7,0.9,1.4,1.7,2.1c0.8,0.7,1.1,1.7,1,2.6c0,0.9-0.4,1.7-0.8,2.2c-0.5,0.5-0.7,0.8-0.9,1.1 s-0.3,0.9-0.6,1.9c-0.3,1-0.5,2.9-0.6,5s-0.1,4.2,0,5.7c0.5-0.8,1.2-1.5,1.9-2c0.7-0.5,1.5-0.8,2-1c0.4,3.9,0.2,6.6-0.2,8.6 c-0.3,2-0.9,3.3-1.2,4.4c-0.1,0.3-0.2,0.5-0.4,0.4c-0.2,0-0.4-0.2-0.5-0.6c-0.3-0.9-0.8-2.3-1.4-3.6c-0.6-1.3-1.3-2.5-2-3.1 c-1.9-1.9-2.8-2.9-3.2-3.7s-0.3-1.4-0.3-2.6c-3-1.5-4-3.3-4-5.1c0-1.7,0.9-3.3,1.7-4.5c0.8-1.1,1.4-2.5,1.9-3.8 c0.5-1.3,0.7-2.4,0.8-3.1c0.1-0.7-0.3-2-0.8-3.3c-0.6-1.3-1.3-2.7-2.2-3.7c-0.2-0.1-0.7-0.2-1.3-0.1c-0.6,0.1-1.2,0.4-1.6,1.3 c-0.4,0.9-1,1.4-1.5,1.6c-0.6,0.2-1.2,0.3-1.8,0.2c-0.6-0.1-1.4-0.1-2.1,0c-0.7,0.1-1.4,0.5-1.9,1.2c-0.5,0.7-1.1,0.7-1.8,0.5 c-0.6-0.2-1.3-0.6-1.8-0.9c-0.5-0.2-0.8-0.5-1.2-0.7c-0.4-0.2-0.9-0.3-2-0.2c-1.1,0.1-1.5,0.8-1.8,1.7c-0.4,0.8-0.7,1.7-1.6,1.9 c-0.9,0.3-1.6-0.2-2-1.2c-0.4-1-0.5-2.4-0.5-3.9c-0.3-1.9,0.4-4.9,1.3-7.7c0.9-2.8,2-5.4,2.6-6.7c0.5-1.3,1.4-3.7,2.2-6.5 c0.9-2.7,1.7-5.7,2.3-8c0.6-2.3,1.9-4,3.6-5.6s3.5-3,5.2-4.7c1.7-1.7,3.7-3.2,5.7-4.3c2-1.1,4-1.8,5.5-1.8c1.5,0,3.1,0.9,4.4,1.8 c1.3,1,2.4,2,2.9,2.6c0.5,0.6,1,1.9,1.5,3.3c0.5,1.4,1,2.9,1.6,3.8c0.6,0.9,1.1,2.2,1.5,3.8c0.4,1.6,0.8,3.4,1.1,5.1 c0.3,1.8,1,3,1.7,4c0.7,1,1.5,1.8,2,2.7c0.5,0.9,1.1,3,1.8,5.3c0.7,2.3,1.6,4.9,2.7,6.6c1.1,1.7,2.8,2.9,4.5,3.6 c1.7,0.8,3.3,1.1,4.1,1.4c0.8,0.2,1.4,0.3,2,0.6c0.6,0.3,1.3,0.9,2.3,2.1c1.4,1.6,3.5,3,5.5,4c2,1,3.8,1.6,4.6,1.9 C177.9,133.6,175,133.6,172.4,133.1z"></path>
+                              <path d="M72.8,33.5l-2.9,0.8L69,47.7l2.7-0.8l0.1-2.8l4.5-1.3l1.5,2.3l2.8-0.8L72.8,33.5z M71.9,41.9l0.2-5.3l0,0l2.9,4.4 L71.9,41.9z"></path>
+                              <path d="M110.6,35.8c-0.1-1.2-0.7-2.4-2.3-2.8c0.5-0.3,1.5-0.9,1.2-2.8c-0.1-1.3-1.1-3.1-4.2-2.8l-6.1,0.7l1.4,12.6l5.3-0.6 c2.6-0.3,3.2-0.8,3.8-1.6C110.4,37.8,110.7,36.8,110.6,35.8z M102,30l3-0.3c1.2-0.1,2,0.1,2.1,1.1c0.1,1-0.7,1.5-1.7,1.6l-3.1,0.3 L102,30z M106.1,37.8l-3.2,0.4l-0.4-3.4l3.3-0.4c0.9-0.1,1.9,0.2,2.1,1.3C108.1,37.1,107.4,37.7,106.1,37.8z"></path>
+                              <path d="M120.4,26c-1.7,0.1-6,1-5.8,6.9c0.2,5.9,4.7,6.5,6.3,6.4c1.7-0.1,6-1,5.8-6.9C126.5,26.4,122,25.9,120.4,26z M120.8,37.1 c-1.4,0.1-3.5-0.7-3.6-4.3c-0.1-3.5,1.8-4.5,3.3-4.6c1.4-0.1,3.5,0.7,3.6,4.3C124.2,36,122.2,37,120.8,37.1z"></path>
+                              <path d="M141.3,36.2c0.1-2.4-0.5-2.8-1.5-3.3c1.3-0.4,2-1.6,2-3c0-1.1-0.5-3.6-3.9-3.7l-6.4-0.2l-0.4,12.7l2.6,0.1l0.2-5l2.7,0.1 c2,0.1,2,0.7,2,2.5c0,1.3,0,2,0.2,2.6l2.9,0.1l0-0.3C141.2,38.5,141.2,38,141.3,36.2z M137.1,31.8l-3.1-0.1l0.1-3.4l3.3,0.1 c1.5,0,1.8,1,1.8,1.7C139.1,31.4,138.4,31.9,137.1,31.8z"></path>
+                           </g>
+                        </g>
+                     </g>
+                  </svg>
+               </a>
+            </div>
+         </div>
+      </section>
+      <section id="requirementsSection" class="bg-gray-50 dark:bg-gray-800">
+         >
+         <div class="items-center max-w-screen-xl px-4 py-8 mx-auto lg:grid lg:grid-cols-4 lg:gap-16 xl:gap-24 lg:py-24 lg:px-6">
+            <div class="col-span-2 mb-8">
+               <h2 class="mt-3 mb-4 text-3xl font-extrabold tracking-tight text-gray-900 md:text-3xl dark:text-white">Opšti uslovi iznajmljivanja vozila</h2>
+               <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Pre nego što iznajmite vozilo, važno je da se upoznate sa našim opštim uslovima korišćenja usluga. Naša kompanija se trudi da vam obezbedi najkvalitetniju uslugu, a poštovanje ovih uslova je ključni deo tog procesa.</p>
+               <div class="pt-6 mt-6 space-y-4 border-t border-gray-200 dark:border-gray-700">
+                  <div>
+                     <div class="inline-flex items-center text-red-500 hover:text-red-800 dark:text-red-500 dark:hover:text-red-700">
+                        <svg class="w-5 h-5 mr-2 " fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                           <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                           <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/>
+                        </svg>
+                        <p class="text-black">Vozač mora imati minimum 21 godinu
+                     </div>
+                  </div>
+                  <div>
+                     <div class="inline-flex items-center text-red-500 hover:text-red-800 dark:text-red-500 dark:hover:text-red-700">
+                        <svg class="w-5 h-5 mr-2 " fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                           <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                           <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/>
+                        </svg>
+                        <p class="text-black">Minimum 2 godine posedovanja vozačke dozvole i obavezno na uvid
+                     </div>
+                  </div>
+                  <div>
+                     <div class="inline-flex items-center text-red-500 hover:text-red-800 dark:text-red-500 dark:hover:text-red-700">
+                        <svg class="w-5 h-5 mr-2 " fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                           <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                           <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/>
+                        </svg>
+                        <p class="text-black">Obavezna identifikacija - lična karta ili pasoš na uvid
+                     </div>
+                  </div>
+                  <div>
+                     <div class="inline-flex items-center text-red-500 hover:text-red-800 dark:text-red-500 dark:hover:text-red-700">
+                        <svg class="w-5 h-5 mr-2 " fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                           <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                           <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/>
+                        </svg>
+                        <p class="text-black">Obavezna kreditna kartica kao sredstvo depozita plaćanja ili gotovinski <br>depozit od 300 do 1800 EUR u zavisnosti od klase vozila
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-span-2 space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0">
+               <div>
+                  <svg class="animate-bounce w-5 h-5 mb-2 text-blue-600 md:w-10 md:h-10 dark:text-blue-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                     <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                     <path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>
+                  </svg>
+                  <h3 class="mb-2 text-2xl font-bold dark:text-white">DUŽINA NAJMA</h3>
+                  <p class="font-light text-gray-500 dark:text-gray-400">Minimalna dužina najma je 1 dan</p>
+               </div>
+               <div>
+                  <svg class="animate-bounce w-5 h-5 mb-2 text-blue-600 md:w-10 md:h-10 dark:text-blue-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                     <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                     <path d="M64 32C28.7 32 0 60.7 0 96v32H576V96c0-35.3-28.7-64-64-64H64zM576 224H0V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V224zM112 352h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm112 16c0-8.8 7.2-16 16-16H368c8.8 0 16 7.2 16 16s-7.2 16-16 16H240c-8.8 0-16-7.2-16-16z"/>
+                  </svg>
+                  <h3 class="mb-2 text-2xl font-bold dark:text-white">PLAĆANJE I DEPOZIT</h3>
+                  <p class="font-light text-gray-500 dark:text-gray-400">Najam se plaća prilikom preuzimanja rent a car vozila i to kreditnom karticom.</p>
+               </div>
+               <div>
+                  <svg  class="animate-bounce w-5 h-5 mb-2 text-blue-600 md:w-10 md:h-10 dark:text-blue-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                     <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                     <path d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z"/>
+                  </svg>
+                  <h3 class="mb-2 text-2xl font-bold dark:text-white">PREUZIMANJE I VRAĆANJE VOZILA</h3>
+                  <p class="font-light text-gray-500 dark:text-gray-400">Vozilo iz naše ponude Rent a Car vozila se može preuzeti i vratiti u našoj poslovnici.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section id="testimonialSection" class="bg-gray-50 dark:bg-gray-800 ">
+         <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-24 lg:px-6" id="slider">
+            <figure class="slide max-w-screen-md mx-auto">
+               <svg class="h-12 mx-auto mb-3 text-gray-400 dark:text-gray-600" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
+               </svg>
+               <blockquote>
+                  <p class="text-xl font-medium text-gray-900 md:text-2xl dark:text-white">"RentACar je bio ključni faktor u mom nedavnom putovanju. Pronalaženje pravog automobila za iznajmljivanje nikada nije bilo lakše. Njihova raznovrsna ponuda vozila omogućila mi je da pronađem tačno ono što mi je trebalo za putovanje sa porodicom. Bezbednost, udobnost i povoljne cene su samo neki od razloga zašto se uvek vraćam RentACar-u."</p>
+               </blockquote>
+               <figcaption class="flex items-center justify-center mt-6 space-x-3">
+                  <img class="w-6 h-6 rounded-full" src="https://img.lovepik.com/element/40145/1025.png_1200.png" alt="profile picture">
+                  <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
+                     <div class="pr-3 font-medium text-gray-900 dark:text-white">Milica Radović</div>
+                     <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Korisnik</div>
+                  </div>
+               </figcaption>
+            </figure>
+            <figure class="slide max-w-screen-md mx-auto">
+               <svg class="h-12 mx-auto mb-3 text-gray-400 dark:text-gray-600" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
+               </svg>
+               <blockquote>
+                  <p class="text-xl font-medium text-gray-900 md:text-2xl dark:text-white">"RentACar je definitivno moj prvi izbor kada je u pitanju iznajmljivanje automobila. Njihova intuitivna platforma za rezervaciju čini ceo proces jednostavnim i efikasnim. Sa širokim spektrom vozila i povoljnim cenama, RentACar mi uvek pruža pouzdanu uslugu koja prevazilazi moja očekivanja."</p>
+               </blockquote>
+               <figcaption class="flex items-center justify-center mt-6 space-x-3">
+                  <img class="w-6 h-6 rounded-full" src="https://www.svgrepo.com/show/382109/male-avatar-boy-face-man-user-7.svg" alt="profile picture">
+                  <div class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
+                     <div class="pr-3 font-medium text-gray-900 dark:text-white">Marko Petrović</div>
+                     <div class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Korisnik</div>
+                  </div>
+               </figcaption>
+            </figure>
+            <div class="mt-5">
+               <button onclick="prevSlide()" class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                  <svg class="w-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
+                     <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                     <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                  </svg>
+               </button>
+               <button onclick="nextSlide()" class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                  <svg class="w-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
+                     <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                     <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                  </svg>
+               </button>
+            </div>
+         </div>
+      </section>
+      <section id="faqSection" class="bg-white dark:bg-gray-900">
+         <div class="max-w-screen-xl px-4 pt-8 pb-8 mx-auto lg:pb-24 lg:px-6 ">
+            <h2 class="mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 lg:mb-8 lg:text-3xl dark:text-white">Mi brinemo o Vama</h2>
+            <div class="max-w-screen-md mx-auto">
+               <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                  <h3 id="accordion-flush-heading-1">
+                     <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-900 bg-white border-b border-gray-200 dark:border-gray-700 dark:bg-gray-900 dark:text-white" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+                        <span>Šta raditi ukoliko neko ošteti vozilo kada Vi niste prisutni?(npr. na parkingu)</span>
+                        <svg data-accordion-icon="" class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                           <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                     </button>
+                  </h3>
+                  <div id="accordion-flush-body-1" class="" aria-labelledby="accordion-flush-heading-1">
+                     <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Ako je reč o vandalizmu ili oštećenju parkiranog vozila od strane nepoznatog počinioca, u obavezi ste pozvati policiju na broj 192 (broj za RS) koja će sastaviti zapisnik, a njega ste dužni dostaviti poslovnici u koju vraćate iznajmljeno vozilo.</p>
+                     </div>
+                  </div>
+                  <h3 id="accordion-flush-heading-2">
+                     <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+                        <span>Sta raditi u slučaju krađe vozila?</span>
+                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                           <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                     </button>
+                  </h3>
+                  <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
+                     <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">U slučaju krađe vozila, pokušaja krađe vozila i/ili provale u vozilo, odmah pozovite policiju na broj 192 (broj za RS) i kontaktirajte našu poslovnicu.</p>
+                     </div>
+                  </div>
+                  <h3 id="accordion-flush-heading-3">
+                     <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+                        <span>Šta raditi ako se nađete u saobraćajnoj nesreći??</span>
+                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                           <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                     </button>
+                  </h3>
+                  <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
+                     <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Ako se nađete u saobraćajnoj nesreći prvo što treba da uradite je da nazovete lokalnu policiju kao i našu poslovnicu. Zatražite primerak policijskog izveštaja, napravite fotografije mesta saobraćajne nesreće i štete koja je napravljena.</p>
+                     </div>
+                  </div>
+                  <h3 id="accordion-flush-heading-4">
+                     <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-4" aria-expanded="false" aria-controls="accordion-flush-body-4">
+                        <span>Šta raditi ako se vozilo ošteti dok miruje u Vašem prisustvu?</span>
+                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                           <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                     </button>
+                  </h3>
+                  <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-4">
+                     <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Ukoliko se nađete u ovoj situaciji, obavezno pozovite lokalnu policiju da bi se napravio izveštaj i obavezno kontaktirajte našu poslovnicu za sva dalja uputstva.</p>
+                     </div>
+                  </div>
+                  <h3 id="accordion-flush-heading-5">
+                     <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-5" aria-expanded="false" aria-controls="accordion-flush-body-5">
+                        <span>Šta raditi ako se desi neki kvar na vozilu?</span>
+                        <svg data-accordion-icon="" class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                           <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                     </button>
+                  </h3>
+                  <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-5">
+                     <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">Ukoliko se desio neki kvar i ne možete da upravljate iznajmljenim automobilom, zaustavite se na najbližem sigurnom mestu i pozovite našu poslovnicu radi uputsva. Ništa ne radite na svoju ruku već nas obavezno kontaktirajte. U slučaju manjeg ili većeg kvara na vozilu, kao i u slučaju saobraćajne nesreće, prvo treba da se pozove rent a car agencija kako bi se dobili dalja uputstva.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section id="contactSection" class="bg-gray-50 dark:bg-gray-800">
+         <div class="items-center max-w-screen-xl px-4 py-8 mx-auto lg:grid lg:grid-cols-4 lg:gap-16 xl:gap-24 lg:py-24 lg:px-6">
+            <div class="col-span-2 mb-8">
+               <h2 class="mt-3 mb-4 text-3xl font-extrabold tracking-tight text-gray-900 md:text-3xl dark:text-white">Kontakt</h2>
+               <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">Ukoliko imate bilo kakva pitanja, sugestije ili potrebu za dodatnim informacijama, slobodno nas kontaktirajte. </p>
+               <div class="pt-6 mt-6 space-y-4 border-t border-gray-200 dark:border-gray-700">
+                  <form id="contactForm" class="space-y-3">
+                     <div class="grid gap-3 md:grid-cols-2">
+                        <div class="div">
+                           <label for="firstNameInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ime</label>
+                           <div class="relative">
+                              <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                 <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                    <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                 </svg>
+                              </div>
+                              <input type="text" id="firstNameInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Niko">
+                           </div>
+                        </div>
+                        <div class="div">
+                           <label for="lastNameInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prezime</label>
+                           <div class="relative">
+                              <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                    <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                 </svg>
+                              </div>
+                              <input type="text" id="lastNameInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Prezime">
+                           </div>
+                        </div>
+                     </div>
+                     <label for="emailInput" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                     <div class="relative mb-6">
+                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                           <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                              <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                              <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                           </svg>
+                        </div>
+                        <input type="text" id="emailInput" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="niko@mail.com">
+                     </div>
+                     <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Poruka</label>
+                     <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=""></textarea>
+                     <div class="flex items-center mb-4">
+                        <input id="checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Slažem se sa uslovima korišćenja.</label>
+                     </div>
+                     <button type="submit" class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg class="w-3.5 h-3.5 text-white me-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                           <!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                           <path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/>
+                        </svg>
+                        Pošalji poruku
+                     </button>
+                  </form>
+               </div>
+            </div>
+            <div class="col-span-2 space-y-8 md:grid md:grid-cols-1 md:gap-12 md:space-y-0">
+               <div id="googleMap" style="width:100%;height:400px;"></div>
+            </div>
+         </div>
+      </section>
+      <footer class="bg-white rounded-lg m-4">
+         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+            <div class="sm:flex sm:items-center sm:justify-between">
+               <a class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+               <img src="./images/logo.png" class="h-8" alt="Flowbite Logo" />
+               <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">RentACar</span>
+               </a>
+               <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                  <li>
+                     <a href="#heroSection" class="hover:underline me-4 md:me-6">Početna</a>
+                  </li>
+                  <li>
+                     <a href="cars.html" class="hover:underline me-4 md:me-6">Ponuda</a>
+                  </li>
+                  <li>
+                     <a href="#requirementsSection" class="hover:underline me-4 md:me-6">Uslovi za iznajmljivanje</a>
+                  </li>
+                  <li>
+                     <a href="#testimonialSection" class="hover:underline me-4 md:me-6">Recenzije</a>
+                  </li>
+                  <li>
+                     <a href="#faqSection" class="hover:underline me-4 md:me-6">FAQ</a>
+                  </li>
+                  <li>
+                     <a href="#contactSection" class="hover:underline">Kontakt</a>
+                  </li>
+               </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 | Created by <a href="https://www.facebook.com/profile.php?id=100018647296184" class="hover:underline font-bold">Dejan Nikolić</a>. All Rights Reserved.</span>
+         </div>
+      </footer>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
+      <script src="js/script.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3FV1yz2LMWWt0NqesaLq3xxkl9Mhh27U&callback=myMap"></script>
+      <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/tailwindcss-animated@1.1.0/src/index.min.js"></script>
+   </body>
+</html>

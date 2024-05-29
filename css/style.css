@@ -1,0 +1,60 @@
+html {
+    scroll-behavior: smooth;
+}
+header {
+    z-index: 3;
+}
+#img_container{
+    position:relative;
+    overflow:hidden;
+}
+#img_container img{
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    min-width:100%;
+    min-height:100%;
+    margin:auto;
+}
+.slide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.slide.active {
+    display: block;
+    opacity: 1;
+}
+.card {
+    max-width: 350px;
+    max-height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+.card:hover .carImg {
+    transform: scale(1.2);
+    transition: transform 0.5s ease;
+}
+.card .carImg {
+    transition: transform 0.5s ease;
+}
+.star {
+    color: #e67e22;
+}
+button {
+    transition: 0.4s;
+}
+a {
+    transition: 0.4s;
+}
+.car-text {
+    font-size: 15xp;
+    font-weight: 400;
+    color: rgb(120,120, 120);
+}
+.location-details {
+    background-color: rgba(120, 120, 120, .5);
+    font-size: 15px;
+}
